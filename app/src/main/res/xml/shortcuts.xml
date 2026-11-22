@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  静态应用快捷方式：长按桌面应用图标即可看到，也可拖到桌面变成独立图标。
+  只保留「显示歌词悬浮窗」；打开歌词界面直接点应用图标即可，不重复提供。
+  调试信息悬浮窗走通知栏快捷开关（DebugInfoTileService），不在此提供。
+  指向透明中转页 TileActionActivity，由其完成开关动作。
+-->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="toggle_desktop_lyrics"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_desktop"
+        android:shortcutShortLabel="@string/tile_desktop_lyrics"
+        android:shortcutLongLabel="@string/tile_desktop_lyrics"
+        android:shortcutDisabledMessage="@string/shortcut_disabled">
+        <intent
+            android:action="com.trae.lyrics.action.TOGGLE_DESKTOP"
+            android:targetPackage="com.trae.lyrics"
+            android:targetClass="com.trae.androidlyrics.TileActionActivity" />
+    </shortcut>
+</shortcuts>

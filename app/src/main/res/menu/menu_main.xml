@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_open"
+        android:icon="@drawable/ic_open"
+        android:title="@string/action_open"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_exit_edit"
+        android:icon="@drawable/ic_read"
+        android:title="@string/action_exit_edit"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_new_lyric"
+        android:icon="@drawable/ic_edit"
+        android:title="@string/action_new_lyric"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_immersive"
+        android:icon="@drawable/ic_fullscreen"
+        android:title="@string/action_immersive"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_offset_settings"
+        android:title="@string/action_offset_settings"
+        app:showAsAction="never" />
+
+    <!-- 在线搜索歌词：放在右上角工具栏，空间不足时自动进溢出菜单 -->
+    <item
+        android:id="@+id/action_online_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/action_online_search"
+        app:showAsAction="ifRoom" />
+
+    <!-- 主页歌词设置：由「设置」页迁入主页右上角「更多选项」 -->
+    <item
+        android:id="@+id/action_home_lyrics_settings"
+        android:title="@string/action_home_lyrics_settings"
+        app:showAsAction="never" />
+
+    <!-- 监听状态：主页右上角「更多选项」 -->
+    <item
+        android:id="@+id/action_listen_status"
+        android:title="@string/action_listen_status"
+        app:showAsAction="never" />
+
+    <!-- 菜单文案为「更多设置」；仍打开全局设置页 -->
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom" />
+
+    <!-- 「关于」固定放在溢出菜单中、紧跟在「更多设置」下方 -->
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/about_title"
+        app:showAsAction="never" />
+
+</menu>

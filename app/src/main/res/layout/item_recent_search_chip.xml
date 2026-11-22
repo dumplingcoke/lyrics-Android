@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 「最近搜索」的单条关键词：轻量胶囊，文字过长时尾部省略（完整关键词仍参与搜索） -->
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/RecentSearchChip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />

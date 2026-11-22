@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 自定义背景图层：fitCenter 完整显示原图，不按屏幕比例自动裁切；
+         需要放大/移动时由「修改图片显示位置」里的缩放与拖动决定 -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
+    <!-- 半透明遮罩，保证文字在背景图上可读 -->
+    <View
+        android:id="@+id/backgroundMask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000" />
+
+    <!-- 内容层：顶部/底部由代码按系统栏 insets 加内边距，
+         背景图层与遮罩仍铺满整屏（含状态栏区域），实现沉浸式连续背景 -->
+    <LinearLayout
+        android:id="@+id/contentRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:titleTextAppearance="@style/TextAppearance.Material3.TitleMedium"
+            app:titleTextColor="#FFFFFF" />
+
+        <!-- 播放模式：歌词层（透明，只画文字）+ 匹配状态占位提示。
+             容器逐行对应原项目 homeLyricsFade()：独立离屏合成 + 全高渐变 DstIn，
+             只裁歌词文字的 alpha，专辑背景与遮罩是另外两层、一个像素都不改。 -->
+        <com.trae.androidlyrics.LyricsFadeFrameLayout
+            android:id="@+id/lyricDisplayRoot"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lyricsRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="40dp"
+                android:paddingBottom="40dp" />
+
+            <!-- 只作提示：不拦截触摸，长按空白处仍可进入编辑模式 -->
+            <TextView
+                android:id="@+id/lyricStatusHint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:clickable="false"
+                android:focusable="false"
+                android:textColor="#CCFFFFFF"
+                android:textSize="18sp"
+                android:visibility="gone" />
+        </com.trae.androidlyrics.LyricsFadeFrameLayout>
+
+        <!-- 编辑模式容器 -->
+        <LinearLayout
+            android:id="@+id/editContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.trae.androidlyrics.LyricEditText
+                android:id="@+id/editorText"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="top|start"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:lineSpacingExtra="4dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:scrollbars="vertical"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#66FFFFFF"
+                android:importantForAutofill="no"
+                tools:ignore="LabelFor" />
+
+            <!-- 编辑模式底部工具栏（两行：操作行 + 撤销/字体行） -->
+            <LinearLayout
+                android:id="@+id/editToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#CC000000"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <!-- 第一行：自动换行 / 保存 / 另存为 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/btnWrap"
+                        style="@style/EditActionText"
+                        android:text="@string/wrap" />
+
+                    <TextView
+                        android:id="@+id/btnSave"
+                        style="@style/EditActionText"
+                        android:text="@string/action_save" />
+
+                    <TextView
+                        android:id="@+id/btnSaveAs"
+                        style="@style/EditActionText"
+                        android:text="@string/action_save_as" />
+                </LinearLayout>
+
+                <!-- 第二行：撤销 / 恢复 / 字体大小滑块 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="6dp">
+
+                    <TextView
+                        android:id="@+id/btnUndo"
+                        style="@style/EditActionText"
+                        android:text="@string/undo" />
+
+                    <TextView
+                        android:id="@+id/btnRedo"
+                        style="@style/EditActionText"
+                        android:text="@string/redo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/font_size"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:layout_marginStart="8dp" />
+
+                    <SeekBar
+                        android:id="@+id/editFontSize"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:min="10"
+                        android:max="40"
+                        android:progress="16" />
+                </LinearLayout>
+
+                <!-- 第三行：上一行 / 下一行 / 整体偏移 / 进度调节时间设置（位于进度调节控件上方） -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="6dp">
+
+                    <TextView
+                        android:id="@+id/btnPrevLine"
+                        style="@style/EditActionText"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="13sp"
+                        android:text="@string/prev_line" />
+
+                    <TextView
+                        android:id="@+id/btnNextLine"
+                        style="@style/EditActionText"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="13sp"
+                        android:text="@string/next_line" />
+
+                    <TextView
+                        android:id="@+id/btnGlobalOffset"
+                        style="@style/EditActionText"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="13sp"
+                        android:text="@string/global_offset" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/btnSeekStepSettings"
+                        style="@style/EditActionText"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="13sp"
+                        android:text="@string/seek_step_settings" />
+                </LinearLayout>
+
+                <!-- 第四行：添加/更新时间戳 + 播放控制（打轴用） -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="6dp">
+
+                    <TextView
+                        android:id="@+id/btnTimestamp"
+                        style="@style/EditActionText"
+                        android:text="@string/add_timestamp" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/btnRewind5"
+                        style="@style/EditActionText"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="13sp"
+                        android:text="@string/rewind_5s" />
+
+                    <TextView
+                        android:id="@+id/btnRewind1"
+                        style="@style/EditActionText"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="13sp"
+                        android:text="@string/rewind_1s" />
+
+                    <TextView
+                        android:id="@+id/btnPlayPause"
+                        style="@style/EditActionText"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="13sp"
+                        android:text="@string/pause_playback" />
+
+                    <TextView
+                        android:id="@+id/btnForward1"
+                        style="@style/EditActionText"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="13sp"
+                        android:text="@string/forward_1s" />
+
+                    <TextView
+                        android:id="@+id/btnForward5"
+                        style="@style/EditActionText"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="13sp"
+                        android:text="@string/forward_5s" />
+                </LinearLayout>
+
+                <!-- 第五行：「更多设置」单独占一行，靠最右侧 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="6dp">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/btnMoreSettings"
+                        style="@style/EditActionText"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="13sp"
+                        android:text="@string/more_settings" />
+                </LinearLayout>
+
+                <!-- 第六行：可在「更多设置」中单独显隐的编辑辅助按钮。
+                     按钮一行放不下时的处理方式由「更多设置」里的分段控件决定：
+                     「自动换行」（默认）或「左右滚动」。 -->
+                <HorizontalScrollView
+                    android:id="@+id/editExtraRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:scrollbars="none">
+
+                    <com.trae.androidlyrics.EditButtonsLayout
+                        android:id="@+id/editExtraButtons"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/btnOpenKeyboard"
+                            style="@style/EditActionText"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:textSize="13sp"
+                            android:text="@string/open_keyboard" />
+
+                        <TextView
+                            android:id="@+id/btnAddBlankAbove"
+                            style="@style/EditActionText"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:textSize="13sp"
+                            android:text="@string/add_blank_above" />
+
+                        <TextView
+                            android:id="@+id/btnAddBlankBelow"
+                            style="@style/EditActionText"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:textSize="13sp"
+                            android:text="@string/add_blank_below" />
+
+                        <TextView
+                            android:id="@+id/btnDeleteAllBlankLines"
+                            style="@style/EditActionText"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:textSize="13sp"
+                            android:text="@string/delete_all_blank_lines" />
+
+                        <TextView
+                            android:id="@+id/btnDeleteCurrentLine"
+                            style="@style/EditActionText"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:textSize="13sp"
+                            android:text="@string/delete_current_line" />
+                    </com.trae.androidlyrics.EditButtonsLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 主页底部媒体控制条（由「应用外观 → 底部播放控制条」控制显隐） -->
+        <include
+            android:id="@+id/mediaControls"
+            layout="@layout/layout_media_controls" />
+
+    </LinearLayout>
+
+    <!-- 柔化由 LyricsFadeFrameLayout（歌词层自身）按原项目 homeLyricsFade() 的
+         Offscreen + DstIn 全高渐变实现：只裁歌词文字 alpha，背景像素不动。
+         这里不再叠加任何深色渐变带，避免带的下沿形成可见的横向硬边。 -->
+
+</FrameLayout>

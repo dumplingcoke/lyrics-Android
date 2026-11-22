@@ -1,0 +1,11 @@
+# 复制本文件为 local.properties 后按实际情况填写。
+# local.properties 不会被提交到仓库。
+
+# Android SDK 路径
+sdk.dir=C:/Users/<你的用户名>/AppData/Local/Android/Sdk
+
+# 可选：自定义签名配置（不填写则使用默认调试签名）
+signing.storeFile=C:/path/to/your.keystore
+signing.storePassword=
+signing.keyAlias=
+signing.keyPassword=

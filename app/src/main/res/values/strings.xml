@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">歌词</string>
+    <string name="settings_title">更多设置</string>
+
+    <string name="action_open">打开文件</string>
+    <string name="action_new_lyric">新建歌词</string>
+    <string name="new_lyric_default_name">新建歌词</string>
+    <string name="new_lyric_unsaved">新建歌词（未保存）</string>
+    <string name="new_lyric_format">歌词格式</string>
+    <string name="new_lyric_format_lrc">LRC</string>
+    <string name="new_lyric_format_srt">SRT</string>
+    <string name="new_lyric_format_txt">TXT</string>
+    <string name="new_lyric_ext_hint">文件扩展名：.%1$s</string>
+    <string name="action_save">保存</string>
+    <string name="action_save_as">另存为…</string>
+    <!-- 主页「更多选项」中的入口；与编辑页的「更多设置」区分开 -->
+    <string name="action_settings">更多设置</string>
+    <string name="action_home_lyrics_settings">主页歌词设置</string>
+    <string name="action_exit_edit">退出编辑</string>
+    <string name="action_immersive">沉浸模式</string>
+    <string name="action_exit_immersive">退出沉浸</string>
+
+    <string name="empty_hint">尚未打开歌词文件\n\n点击右上角“打开文件”，或用其他应用以“歌词”打开 txt / lrc / srt 文件。</string>
+    <string name="shared_text_name">分享的文本</string>
+
+    <string name="theme_section">外观主题</string>
+    <string name="theme_dark">深色</string>
+    <string name="theme_light">浅色</string>
+    <string name="theme_system">跟随系统</string>
+
+    <string name="appearance_section">显示效果</string>
+    <string name="font_size">播放字体大小</string>
+    <string name="lyric_alignment">歌词对齐方式</string>
+    <string name="word_by_word">逐字动画（需要格式支持）</string>
+    <string name="word_soft_transition">逐字动画柔化过渡</string>
+    <string name="word_soft_transition_hint">仅柔化已唱颜色蒙版的前缘，播放界面与桌面歌词悬浮窗统一生效</string>
+    <string name="word_soft_transition_strength">柔化强度</string>
+    <string name="reset_word_soft_transition_strength">恢复默认柔化强度</string>
+    <string name="word_soft_transition_reset_done">已恢复默认柔化强度（16%）</string>
+    <string name="sung_text_color">已唱歌词颜色</string>
+    <string name="lyric_color_settings">歌词颜色设置</string>
+    <string name="lyric_color_settings_hint">分别设置主界面歌词与桌面歌词的已唱、文字与描边颜色</string>
+    <string name="main_lyric_section">主界面歌词</string>
+    <string name="main_sung_text_color_hint">逐字动画中已唱部分的颜色，仅作用于主界面歌词</string>
+    <string name="main_lyric_color_note">文字颜色作用于普通行与逐字动画的未唱部分；已唱颜色只在逐字动画中显示</string>
+    <string name="desktop_sung_text_color_hint">逐字动画中已唱部分的颜色，仅作用于桌面歌词悬浮窗</string>
+    <string name="main_text_alpha_hint" formatted="false">0% 完全透明，100% 完全不透明；默认 100%，只影响主界面歌词文字、描边与逐字动画颜色</string>
+    <string name="outline_position">描边位置</string>
+    <string name="outline_position_inside">内部</string>
+    <string name="outline_position_center">居中</string>
+    <string name="outline_position_outside">外部</string>
+    <string name="outline_position_hint">内部只在字形内描边、居中跨字形边界各占一半、外部只在字形外描边</string>
+    <string name="force_word_by_word">强行兼容逐字动画</string>
+    <string name="force_word_by_word_hint">根据歌词整体时间推算逐字时间，大概率不准</string>
+    <string name="show_untimed_lines">显示不带时间戳的行</string>
+    <string name="show_untimed_lines_hint">过渡台词、说明等没有时间戳的歌词行也会在播放时显示</string>
+    <string name="seek_toast">点击歌词跳转时显示时间提示</string>
+    <string name="scroll_animation">滚动动画</string>
+    <string name="bilingual_highlight">双语歌词高亮行</string>
+    <string name="bilingual_first">仅第一行</string>
+    <string name="bilingual_second">仅第二行</string>
+    <string name="bilingual_both">两行都高亮</string>
+    <string name="bilingual_show_both">两行都显示</string>
+    <string name="title_list_mode">标题栏点击列表</string>
+    <string name="title_list_matched">匹配到的歌词</string>
+    <string name="title_list_recent">最近打开的歌词</string>
+    <string name="matched_files_empty">暂无匹配到的歌词</string>
+    <string name="duplicate_strategy">下载目录重名处理</string>
+    <string name="duplicate_ask">每次询问</string>
+    <string name="duplicate_overwrite">直接覆盖</string>
+    <string name="duplicate_copy">创建副本</string>
+    <string name="reset_duplicate_strategy">重置重名处理策略为询问</string>
+    <string name="anim_smooth">平滑</string>
+    <string name="anim_none">无动画</string>
+    <string name="anim_fade">淡入</string>
+    <string name="pick_background">自定义背景图片</string>
+    <string name="clear_background">清除背景图片</string>
+    <string name="background_applied">背景已应用</string>
+    <string name="background_cleared">背景已清除</string>
+
+    <string name="desktop_section">桌面歌词</string>
+    <string name="desktop_lyrics">启用桌面歌词</string>
+    <string name="auto_start_desktop_lyrics">启动时自动打开桌面歌词</string>
+    <string name="desktop_process_guard">桌面歌词进程保护</string>
+    <string name="desktop_process_guard_hint">开启后，划掉应用后台或一键清理后台时会自动恢复桌面歌词；关闭时清除后台即保持关闭，不会再自动恢复。部分系统还需允许自启动/后台运行</string>
+    <string name="desktop_process_guard_on">已开启桌面歌词进程保护</string>
+    <string name="desktop_process_guard_off">已关闭桌面歌词进程保护</string>
+    <string name="desktop_allow_status_bar">允许桌面歌词划入系统状态栏</string>
+    <string name="notify_toggle_desktop">通知栏显示桌面歌词开关</string>
+    <string name="notify_toggle_desktop_hint">开启后可在通知栏快速开关桌面歌词，需要通知权限</string>
+    <string name="notify_toggle_on_start">启动时发送桌面歌词开关通知</string>
+    <string name="notify_toggle_on_start_hint">无论桌面歌词是否开启，启动时都发送带开关的通知，需要通知权限</string>
+    <string name="notify_permission_denied">未获得通知权限，请在系统设置中允许本应用发送通知</string>
+    <string name="notif_desktop_on_text">桌面歌词已开启</string>
+    <string name="notif_desktop_off_text">桌面歌词已关闭</string>
+    <string name="notif_action_turn_on">开启桌面歌词</string>
+    <string name="notif_action_turn_off">关闭桌面歌词</string>
+    <string name="desktop_font_size">桌面歌词字体大小</string>
+    <string name="desktop_no_lyric">暂无歌词</string>
+    <string name="desktop_no_playback">没有检测到播放</string>
+    <string name="desktop_matching_lyric">正在匹配歌词</string>
+    <string name="desktop_no_match_lyric">无匹配歌词</string>
+    <string name="desktop_fetching_online_lyric">无匹配歌词，正在在线获取歌词</string>
+    <string name="desktop_background">显示背景</string>
+    <string name="desktop_background_alpha">背景透明度</string>
+    <string name="desktop_background_alpha_hint" formatted="false">0% 完全透明，100% 完全不透明；默认 80%，仅影响桌面歌词背景</string>
+    <string name="alpha_percent">%1$d%%</string>
+    <string name="reset_background_alpha">恢复默认透明度</string>
+    <string name="reset_default_short">恢复默认</string>
+    <string name="background_alpha_reset_done">已恢复默认背景透明度（80%）</string>
+    <string name="desktop_edge_fade">桌面歌词左右边缘渐隐</string>
+    <string name="desktop_edge_fade_strength">渐隐范围</string>
+    <string name="reset_desktop_edge_fade">恢复默认渐隐范围</string>
+    <string name="edge_fade_reset_done">已恢复默认渐隐范围（1）</string>
+    <string name="desktop_word_by_word">桌面歌词逐字动画（需要格式支持）</string>
+    <string name="desktop_word_by_word_hint">仅对带逐字时间戳的歌词格式生效，已唱部分显示「已唱歌词颜色」</string>
+    <string name="desktop_force_word_by_word">桌面歌词强行兼容逐字动画</string>
+    <string name="desktop_force_word_by_word_hint">与「强行兼容逐字动画」使用同一判断逻辑：不带逐字时间戳时按整行时长推算，大概率不准</string>
+    <string name="desktop_text_color">文字颜色</string>
+    <string name="desktop_text_outline">文字描边</string>
+    <string name="desktop_outline_color">描边颜色</string>
+    <string name="desktop_width">桌面歌词宽度</string>
+    <string name="desktop_line_count">显示行数</string>
+    <string name="desktop_line_count_hint">双语歌词选择「两行都显示」时，桌面歌词会额外增加高度</string>
+    <string name="desktop_bilingual_line">双语歌词显示行（桌面歌词）</string>
+    <string name="desktop_alignment">对齐方式</string>
+    <string name="line_single">单行</string>
+    <string name="line_double">双行</string>
+    <string name="align_left">左对齐</string>
+    <string name="align_center">居中</string>
+    <string name="align_right">右对齐</string>
+    <string name="desktop_position_x">水平位置（0 为屏幕中间，左 → 右）</string>
+    <string name="desktop_position_y">垂直位置（0 为屏幕中间，上 → 下）</string>
+    <string name="desktop_position_hint">滑块范围 -3000px ~ +3000px；0 为屏幕中间，负值向左/上、正值向右/下；两个「重置」按钮分别单独归零</string>
+    <string name="reset_desktop_position_x">重置水平位置（回到 0）</string>
+    <string name="reset_desktop_position_y">重置垂直位置（回到 0）</string>
+    <string name="desktop_position_x_reset_done">水平位置已重置为 0（屏幕中间）</string>
+    <string name="desktop_position_y_reset_done">垂直位置已重置为 0（屏幕中间）</string>
+    <string name="overlay_permission_hint">请在系统设置中授予"显示在其他应用上层"权限</string>
+    <string name="desktop_open_app">打开歌词界面</string>
+    <string name="desktop_close">关闭桌面歌词</string>
+    <string name="desktop_resync_lyric">一键对齐进度</string>
+    <string name="desktop_resync_done">已按播放器进度对齐歌词</string>
+    <string name="desktop_resync_failed">暂无可用的播放进度，稍后再试</string>
+
+    <!-- 系统下拉快捷设置磁贴 -->
+    <string name="tile_desktop_lyrics">打开桌面歌词</string>
+    <string name="tile_debug_info">歌词调试信息</string>
+    <string name="tile_desktop_on">已开启</string>
+    <string name="tile_desktop_off">已关闭</string>
+    <string name="tile_open_lyrics_hint">点击打开</string>
+    <string name="tile_overlay_permission_hint">请先授予「显示在其他应用上层」权限，再点一次磁贴开启悬浮窗</string>
+
+    <!-- 静态应用快捷方式 -->
+    <string name="shortcut_disabled">暂不可用</string>
+    <string name="debug_float_on">调试信息已开启</string>
+    <string name="debug_float_off">调试信息已关闭</string>
+    <string name="desktop_bg_on">开</string>
+    <string name="desktop_bg_off">关</string>
+    <string name="desktop_match_lyric">匹配歌词</string>
+    <string name="desktop_match_none">未匹配到歌词文件</string>
+    <string name="desktop_match_current">当前：%1$s</string>
+    <string name="manual_add_lyric">无匹配的歌词，我要手动添加</string>
+    <string name="match_show_all">显示全部候选（共 %1$d 个）</string>
+    <string name="manual_add_bound">已手动添加，下次将优先匹配该歌词</string>
+    <string name="desktop_auto_fit_width">自适应宽度（按歌词长度自动调整）</string>
+    <string name="desktop_auto_fit_max_width">最大宽度（超出后滚动显示）</string>
+    <string name="desktop_auto_fit_padding">左右边距</string>
+    <string name="reset_desktop_width">恢复默认宽度</string>
+    <string name="width_reset_done">已恢复默认宽度</string>
+    <string name="adjust_minus_one">-1</string>
+    <string name="adjust_plus_one">+1</string>
+
+    <string name="permission_section">权限</string>
+    <string name="notif_access_granted">通知使用权：已授予</string>
+    <string name="notif_access_denied">通知使用权：未授予（歌词无法跟随播放进度）</string>
+    <string name="notif_access_manage">管理通知使用权</string>
+    <string name="notif_access_title">需要通知使用权</string>
+    <string name="notif_access_message">歌词需要读取系统正在播放的音乐进度来同步滚动歌词。请在系统设置中授予本应用通知使用权。</string>
+    <string name="notif_access_go">去设置</string>
+
+    <string name="other_section">其他</string>
+    <string name="immersive_show_bars">沉浸模式下显示状态栏信息</string>
+
+    <string name="debug_mode">调试信息悬浮窗</string>
+    <string name="debug_mode_summary">显示当前歌曲信息悬浮窗</string>
+    <string name="copy">复制</string>
+    <string name="debug_copied">已复制当前歌曲信息</string>
+
+    <string name="undo">撤销</string>
+    <string name="redo">恢复</string>
+    <string name="wrap">自动换行</string>
+    <string name="wrap_on">自动换行：开</string>
+    <string name="wrap_off">自动换行：关</string>
+
+    <!-- 编辑模式打轴工具 -->
+    <!-- 进入编辑状态的歌词编辑提示 -->
+    <string name="edit_tip_title">歌词编辑提示</string>
+    <string name="edit_tip_message">请使用专业的音乐播放器播放歌曲后再调整时间戳，不要在Telegram之类\'不支持毫秒级\'的播放器进行打轴或者调整时间戳，避免时间对不上</string>
+    <string name="edit_tip_message_naming">建议歌词名称和歌曲文件名称统一，不要因为软件可以匹配到歌词就乱命名，命名不规范的话，以后使用其他音乐播放器识别歌词会后悔的喵~</string>
+    <string name="edit_tip_ok">我知道了</string>
+    <string name="edit_tip_dont_ask">不再询问</string>
+
+    <string name="add_timestamp">添加时间戳</string>
+    <string name="update_timestamp">更新时间戳</string>
+    <string name="rewind_5s">-5秒</string>
+    <string name="rewind_1s">-1秒</string>
+    <string name="forward_1s">+1秒</string>
+    <string name="forward_5s">+5秒</string>
+    <string name="pause_playback">暂停</string>
+    <string name="resume_playback">播放</string>
+    <string name="no_playing_song">未检测到正在播放的歌曲</string>
+
+    <!-- 编辑模式：行跳转 / 整体偏移 / 进度调节时间设置 -->
+    <string name="prev_line">上一行</string>
+    <string name="next_line">下一行</string>
+    <string name="global_offset">整体偏移</string>
+    <string name="global_offset_title">整体偏移</string>
+    <string name="offset_add_option">添加</string>
+    <string name="offset_close">✕</string>
+    <string name="offset_rewind">倒退</string>
+    <string name="offset_forward">前进</string>
+    <string name="offset_delete">删除</string>
+    <string name="offset_unit_ms">毫秒</string>
+    <string name="offset_unit_s">秒</string>
+    <string name="offset_applied_back">已整体倒退 %1$s</string>
+    <string name="offset_applied_forward">已整体前进 %1$s</string>
+    <string name="offset_no_timestamp">未发现可偏移的时间戳</string>
+    <string name="offset_invalid_value">请输入有效的偏移数值</string>
+    <string name="seek_step_settings">进度调节时间设置</string>
+    <string name="seek_step_rewind_big">回退（大）</string>
+    <string name="seek_step_rewind_small">回退（小）</string>
+    <string name="seek_step_forward_small">前进（小）</string>
+    <string name="seek_step_forward_big">前进（大）</string>
+    <string name="seek_step_invalid">秒数需为大于 0 的数值</string>
+    <string name="seek_step_seconds">秒</string>
+    <string name="seek_rewind_fmt">-%1$s秒</string>
+    <string name="seek_forward_fmt">+%1$s秒</string>
+    <string name="offset_value_hint">数值</string>
+
+    <!-- 只显示应用自身使用的跳转目标：播放器快照位置常偏移，不再抓来展示 -->
+    <string name="seek_to">已跳转到 %1$s</string>
+
+    <string name="save_as_title">保存为</string>
+    <string name="save_as_name_hint">文件名</string>
+    <string name="save_as_name_empty">请输入文件名</string>
+    <string name="save_as_pick_location">其它位置…</string>
+    <string name="save_as_to_downloads">保存到下载目录</string>
+    <string name="save_as_downloads_failed">无法直接保存到下载目录，已为你打开系统选择器</string>
+    <string name="saved">已保存</string>
+    <string name="save_failed">保存失败：%1$s</string>
+    <string name="duplicate_title">文件已存在</string>
+    <string name="duplicate_message">下载目录中已存在同名文件「%1$s」，是否覆盖？</string>
+    <string name="duplicate_overwrite_btn">覆盖</string>
+    <string name="duplicate_copy_btn">创建副本</string>
+    <string name="duplicate_remember">记住操作，不再询问</string>
+    <!-- 打开外部歌词时与内部歌词目录同名副本的冲突防护 -->
+    <!-- 注意：Material 弹窗里 setMessage 会吞掉 setItems 的列表（appcompat AlertController
+         setupContent 中 message 优先、直接不挂 ListView），文件名必须并入标题，勿加 setMessage -->
+    <string name="internal_copy_conflict_title">同名歌词「%1$s」已存在，请选择你的操作</string>
+    <string name="conflict_overwrite">覆盖已有文件</string>
+    <string name="conflict_open_existing">打开已有文件</string>
+    <string name="conflict_rename_save">重命名保存</string>
+    <string name="conflict_create_copy">创建副本</string>
+    <string name="conflict_remember">记住这次操作，不再询问</string>
+    <string name="conflict_cancel_only_open">仅打开，不做任何处理(可能会无法编辑保存文件)</string>
+    <string name="conflict_rename_exists">该名字的文件也已存在，请换一个名字</string>
+    <string name="recent_dirs">最近选择的目录</string>
+    <string name="sort_newest">最新优先</string>
+    <string name="sort_oldest">最早优先</string>
+    <string name="select_all">全选</string>
+    <string name="delete_selected">删除选中</string>
+    <string name="delete_all">全部删除</string>
+    <string name="recent_dir_internal">内部存储</string>
+    <string name="recent_files">最近打开</string>
+    <string name="recent_files_empty">暂无最近打开的文件</string>
+    <string name="title_list_current">当前播放</string>
+    <string name="open_failed">打开失败：%1$s</string>
+    <string name="unsaved_title">内容尚未保存</string>
+    <string name="unsaved_message">是否保存当前修改？</string>
+    <string name="dialog_save">保存</string>
+    <string name="dialog_discard">不保存</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_confirm">确认</string>
+
+    <string name="close">关闭</string>
+
+    <string name="select_none">取消全选</string>
+    <string name="cancel_edit">取消编辑</string>
+    <string name="storage_manage">歌词文件存储</string>
+    <string name="import_lyrics">导入</string>
+    <string name="export_lyrics">导出</string>
+    <string name="no_lyric_files">暂无歌词文件</string>
+    <string name="imported_count">已导入 %1$d 个文件</string>
+    <string name="exported_count">已导出 %1$d 个文件</string>
+    <string name="auto_match_lyrics">自动匹配歌词文件</string>
+    <string name="match_similarity">匹配相似度</string>
+    <string name="similarity_percent">%1$d%%</string>
+    <string name="reset_match_similarity">恢复默认相似度</string>
+    <string name="similarity_reset_done">已恢复默认相似度（55%）</string>
+    <string name="view_match_rules">查看匹配规则</string>
+    <string name="match_rules_title">自动匹配规则</string>
+    <string name="match_rules_content" formatted="false">歌曲切换时，从应用歌词存储目录中按以下规则匹配歌词文件（取相似度最高者）：\n\n1. 文件名与歌曲标题完全一样 → 直接匹配\n2. 文件名以标题开头，剩余部分以下划线或中划线连接（如“标题_中文”“标题-最终版”）→ 视为该歌曲的歌词\n3. 标题本身带下划线/中划线时，向后延伸匹配（如歌曲“晴天-周杰伦”可匹配“晴天-周杰伦-英文”）\n4. 文件名同时包含标题与歌手 → 高优先级\n5. 文件名包含标题，或与标题/“标题+歌手”整体相似\n\n多个候选相似度接近时，优先选择你上次打开过的版本；相似度低于设置阈值（默认55%）则不自动加载。可在本设置界面或桌面歌词面板调整阈值。\n\n相似度大概参照（按文件名与歌名的编辑距离估算）：\n· 文件名与歌名完全相同 → 100%\n· 歌名后带“_后缀”或“-后缀”（如“标题_Live”）→ 90%\n· 文件名包含完整歌名 → 80%以上\n· 模糊相似：以10个字的歌名为例，允许错约1个字 → 90%，错约3个字 → 70%，错约4~5个字（约一半）→ 55%</string>
+    <string name="import_from_dir">从目录导入</string>
+    <string name="add_new_dir">添加新目录</string>
+    <string name="import_from_dir_title">从目录导入歌词</string>
+    <string name="no_recent_dirs">暂无最近目录，请先在“另存为”中选择过目录</string>
+    <string name="import_select_dirs">最近选择目录（勾选后点击导入可快捷导入）</string>
+    <string name="remove_selected_dirs">移除选中</string>
+    <string name="import_select_formats">需要导入的歌词格式</string>
+    <string name="import_format_any">不限格式</string>
+    <string name="delete_confirm_title">删除确认</string>
+    <string name="delete_selected_confirm">确定删除选中的 %1$d 个歌词文件吗？删除后无法恢复。</string>
+    <string name="delete_all_confirm">确定删除全部 %1$d 个歌词文件吗？删除后无法恢复。</string>
+    <string name="dialog_confirm_delete">删除</string>
+    <string name="duplicate_files_title">文件重名</string>
+    <string name="duplicate_files_msg">以下文件名字相同：\n%1$s\n\n全部跳过将保留已有文件，全部覆盖将替换已有文件。</string>
+    <string name="overwrite_all">全部覆盖</string>
+    <string name="skip_all">全部跳过</string>
+    <string name="copy_all">创建副本</string>
+    <string name="cancel_op">取消操作</string>
+    <string name="export_duplicates_msg">检测到%1$d个文件重名，请选择你的操作</string>
+    <string name="import_nothing_selected">请先勾选至少一个目录和一种格式</string>
+    <string name="export_selected">导出选中</string>
+    <string name="export_selected_none">请先选中要导出的歌词文件</string>
+
+    <!-- 歌词文件存储：选择模式「更多操作」与重命名 -->
+    <string name="storage_more_actions">更多操作</string>
+    <string name="storage_rename_selected">重命名选中</string>
+    <string name="storage_rename_file_title">重命名文件</string>
+    <string name="storage_rename_batch_title">重命名选中文件</string>
+    <string name="storage_rename_base_hint">基础名称（自动编号，无需填写扩展名）</string>
+    <string name="storage_rename_batch_note">已选中 %1$d 个文件，将依次命名为「名称 (1).后缀」「名称 (2).后缀」…，各自保留原扩展名，并自动跳过已存在的名称。</string>
+    <string name="storage_rename_selected_none">请先选中要重命名的歌词文件</string>
+    <string name="storage_rename_batch_success">已重命名 %1$d 个文件</string>
+    <string name="storage_rename_batch_partial">已重命名 %1$d 个文件，%2$d 个失败</string>
+    <string name="storage_rename_no_change">文件名未改变</string>
+
+    <!-- 歌词文件存储：搜索（任意 / 包含 / 排除 三段式语法） -->
+    <string name="storage_search_hint">搜索文件名或歌词内容</string>
+    <string name="storage_search_help">搜索说明</string>
+    <string name="storage_search_help_title">搜索的最佳姿势</string>
+    <string name="storage_search_help_msg" formatted="false">搜索范围：文件名与歌词内容；多个关键词之间用空格分隔。\n\n任意搜索\n关键词1 空格 关键词2，显示包含任意一个关键词的卡片。\n示例：创意 灵感\n\n包含搜索\n关键词1 空格 +关键词2，显示同时包含两个关键词的卡片。\n示例：创意 +灵感\n\n排除搜索\n关键词1 空格 -关键词2，显示包含关键词1但排除关键词2的卡片。\n示例：创意 -灵感</string>
+    <string name="storage_search_no_result">没有匹配的歌词文件</string>
+
+    <string name="empty_line_display">歌词空行显示</string>
+    <string name="empty_line_none">不处理</string>
+    <string name="empty_line_beat">♬</string>
+    <string name="empty_line_tilde">~</string>
+    <string name="empty_line_accompaniment">伴奏</string>
+    <string name="empty_line_custom">自定义</string>
+    <string name="empty_line_custom_hint">自定义空行显示的文字</string>
+
+    <!-- 颜色选择（预设色卡 + 自定义色相/饱和度/明度） -->
+    <string name="color_custom_expand">自定义颜色</string>
+    <string name="color_custom_collapse">收起自定义</string>
+    <string name="color_hue">色相</string>
+    <string name="color_saturation">饱和</string>
+    <string name="color_brightness">明度</string>
+    <string name="desktop_outline_width">描边粗细</string>
+    <string name="outline_width_value">%1$d dp</string>
+
+    <!-- 桌面歌词快捷导入 -->
+    <string name="quick_import_title">快捷导入新增文件</string>
+    <string name="quick_import_add_dir">＋ 添加目录</string>
+    <string name="quick_import_added_dir">已添加目录</string>
+    <string name="quick_import_action">导入勾选目录的新文件</string>
+    <string name="quick_import_no_dir">请先勾选至少一个目录</string>
+    <string name="quick_import_running">正在导入…</string>
+    <string name="quick_import_done">已导入 %1$d 个新文件</string>
+
+    <!-- 日志抓取 -->
+    <string name="log_section">日志</string>
+    <string name="log_capture">日志抓取</string>
+    <string name="log_capture_summary">开启后记录应用关键运行日志，便于排查问题</string>
+    <string name="log_file">日志文件</string>
+    <string name="log_size">%1$s</string>
+    <string name="log_view_title">日志文件</string>
+    <string name="log_empty">暂无日志内容</string>
+    <string name="log_export">导出</string>
+    <string name="log_copy">复制到剪贴板</string>
+    <string name="log_copy_label">AndroidLyrics 日志</string>
+    <string name="log_copied">日志已复制到剪贴板</string>
+    <string name="log_copy_failed">复制失败</string>
+    <string name="log_clear">清除</string>
+    <string name="log_export_done">日志已导出</string>
+    <string name="log_export_failed">导出失败</string>
+    <string name="log_cleared">日志已清除</string>
+    <string name="log_clear_confirm">确定要清除全部日志吗？</string>
+
+    <!-- 程序数据管理 -->
+    <string name="data_manage">程序数据管理</string>
+    <string name="data_manage_hint">像文件资源管理器一样查看和删除应用数据</string>
+    <string name="data_manage_warning">注意：这里删除的歌词文件、绑定记录等数据，会同步从主界面、桌面歌词、最近打开等所有位置移除，且无法恢复。</string>
+    <string name="data_manage_detail">查看说明</string>
+    <string name="data_root_internal">应用内部数据</string>
+    <string name="data_root_cache">缓存目录</string>
+    <string name="data_root_external">外部数据目录</string>
+    <string name="data_empty">此目录为空</string>
+    <string name="data_up">返回上级</string>
+    <string name="data_delete">删除</string>
+    <string name="data_view">查看</string>
+    <string name="data_view_binary">该文件为二进制内容，无法以文本预览</string>
+    <string name="data_view_too_large">文件过大，无法预览</string>
+    <string name="data_delete_title">删除确认</string>
+    <string name="data_delete_message">确定删除「%1$s」吗？删除后其他位置也会同步移除，且无法恢复。</string>
+    <string name="data_delete_dir_message">确定删除目录「%1$s」及其中的全部内容吗？删除后其他位置也会同步移除，且无法恢复。</string>
+    <string name="data_deleted">已删除「%1$s」</string>
+
+    <!-- 编辑页「更多设置」弹窗 -->
+    <string name="more_settings">更多设置</string>
+    <string name="more_settings_title">更多设置</string>
+    <string name="more_settings_close">关闭</string>
+
+    <string name="edit_button_layout">编辑按钮布局</string>
+    <string name="edit_button_layout_wrap">自动换行</string>
+    <string name="edit_button_layout_scroll">左右滚动</string>
+    <string name="edit_button_layout_hint">按钮一行放不下时使用「自动换行」或「左右滚动」</string>
+
+    <string name="timestamp_precision">添加/更新时间戳时间精度</string>
+    <string-array name="timestamp_precision_options">
+        <item>不要小数点</item>
+        <item>1位小数点</item>
+        <item>2位小数点</item>
+        <item>3位小数点</item>
+    </string-array>
+
+    <string name="decimal_bulk_title">整体小数点修改</string>
+    <string name="decimal_remove_label">移除位数</string>
+    <string-array name="decimal_remove_options">
+        <item>移除最后1位小数点</item>
+        <item>移除最后2位小数点</item>
+        <item>移除所有小数点</item>
+    </string-array>
+    <string name="decimal_mode_label">移除方式</string>
+    <string-array name="decimal_mode_options">
+        <item>直接移除</item>
+        <item>四舍五入后移除</item>
+    </string-array>
+    <string name="decimal_start">开始修改小数点</string>
+    <string name="decimal_undo">撤销修改</string>
+    <string name="decimal_no_timestamp">未发现可修改小数点的时间戳</string>
+    <string name="decimal_applied">已修改 %1$d 处时间戳的小数点</string>
+    <string name="decimal_undo_done">已撤销本次小数点修改</string>
+    <string name="decimal_undo_unavailable">没有可撤销的小数点修改</string>
+    <string name="decimal_undo_blocked">修改后内容已变动，无法直接撤销，请使用工具栏「撤销」</string>
+
+    <string name="scroll_cursor_on_keyboard">升起键盘时，光标选择行移动到可视区域</string>
+    <string name="show_open_keyboard_button">显示「打开键盘」按钮</string>
+    <string name="show_add_blank_above_button">显示「在上方添加空行」按钮</string>
+    <string name="show_add_blank_below_button">显示「在下方添加空行」按钮</string>
+    <string name="show_delete_all_blank_button">显示「删除所有空行」按钮</string>
+    <string name="show_delete_current_line_button">显示「删除当前选中行」按钮</string>
+
+    <string name="open_keyboard">打开键盘</string>
+    <string name="close_keyboard">关闭键盘</string>
+    <!-- 该说明只在「更多设置」弹窗展示，编辑页底部工具栏不再重复显示 -->
+    <string name="open_keyboard_hint">开启后，直接点击文本不会再自动打开键盘</string>
+
+    <string name="add_blank_above">在上方添加空行</string>
+    <string name="add_blank_below">在下方添加空行</string>
+    <string name="delete_all_blank_lines">删除所有空行</string>
+    <string name="delete_current_line">删除当前选中行</string>
+    <string name="blank_lines_deleted">已删除 %1$d 个空行</string>
+    <string name="no_blank_lines">没有空行可删除</string>
+
+    <!-- 设置页：重置所有弹窗提示 -->
+    <string name="reset_dialog_prompts">重置所有弹窗提示</string>
+    <string name="reset_dialog_prompts_hint">重置后，之前设置「不再询问」的弹窗会重新出现</string>
+    <string name="reset_dialog_prompts_done">已重置所有弹窗提示</string>
+    <string name="confirm_reset_dialog_prompts">是否重置所有弹窗提示？之前设置「不再询问」的弹窗会重新出现。</string>
+    <string name="confirm_restore_default_background">是否恢复默认背景？已添加的图片会保留在背景图片库中。</string>
+
+    <!-- 背景图片管理 -->
+    <string name="background_manage_title">背景图片管理</string>
+    <string name="background_manage_hint">点击图片即可选择，选好后点「应用图片」生效</string>
+    <string name="background_manage_empty">还没有背景图片\n点「添加图片」去挑选</string>
+    <string name="background_add">添加图片</string>
+    <string name="background_apply">应用图片</string>
+    <string name="background_delete">删除图片</string>
+    <string name="background_clear_all">清空图片</string>
+    <string name="background_edit_position">修改图片显示位置</string>
+    <string name="background_added">已添加 %1$d 张图片</string>
+    <string name="background_add_failed">图片添加失败，请换一张试试</string>
+    <string name="background_importing">正在导入图片…</string>
+    <string name="background_none_selected">请先点击选择一张图片</string>
+    <string name="confirm_delete_background">确定删除选中的这张背景图片吗？</string>
+    <string name="confirm_clear_backgrounds">确定清空所有背景图片吗？清空后无法恢复。</string>
+    <string name="background_deleted">已删除图片</string>
+    <string name="background_all_cleared">已清空所有背景图片</string>
+
+    <!-- 修改图片显示位置 -->
+    <string name="background_edit_title">修改图片显示位置</string>
+    <string name="background_edit_hint">单指拖动、双指缩放 · 框外半透明部分不会显示；虚线为状态栏底边</string>
+    <string name="background_scale_proportional">比例缩放</string>
+    <string name="background_scale_free">自由缩放</string>
+    <string name="background_edit_reset">重置</string>
+    <string name="background_edit_save">保存</string>
+    <string name="background_edit_saved">已保存显示位置</string>
+    <string name="background_move_horizontal">左右移动</string>
+    <string name="background_move_vertical">上下移动</string>
+    <string name="background_quick_actions">快捷操作</string>
+    <string name="background_fit_width">按比例缩放到左右边界</string>
+    <string name="background_fill_screen">不按比例填满屏幕</string>
+    <string name="background_preview_lyrics_on">开启预览歌词</string>
+    <string name="background_preview_lyrics_off">关闭预览歌词</string>
+    <string name="background_ghost_alpha">界外透明度修改</string>
+    <string name="background_ghost_alpha_title">界外透明度</string>
+    <string name="background_border_off">关闭预览边界</string>
+    <string name="background_border_on">开启预览边界</string>
+    <string name="background_preview_lyric_current">这一行是正在播放的歌词</string>
+    <string name="background_preview_lyric_next">下一行歌词预览</string>
+
+    <!-- 统一提示 / 保存失败弹窗 -->
+    <string name="save_failed_title">保存失败</string>
+
+    <!-- 桌面歌词文字不透明度 -->
+    <string name="desktop_text_alpha">文字不透明度</string>
+    <string name="desktop_text_alpha_hint" formatted="false">0% 完全透明，100% 完全不透明；默认 100%，只影响桌面歌词文字、描边与逐字动画颜色</string>
+    <string name="reset_text_alpha">恢复默认文字不透明度</string>
+    <string name="text_alpha_reset_done">已恢复默认文字不透明度（100%）</string>
+
+    <!-- 按应用开关（毫秒信息不可信）+ 偏移设置弹窗 -->
+    <string name="action_offset_settings">偏移设置</string>
+    <string name="offset_settings_title">偏移设置</string>
+    <string name="app_ms_offset_switch">当前应用的毫秒信息不可信</string>
+    <string name="app_ms_offset_hint">不支持毫秒的播放器建议开启</string>
+    <string name="app_ms_offset_current_app">当前应用：%1$s</string>
+    <string name="app_ms_offset_no_app">未检测到当前播放应用，播放音乐后即可设置</string>
+    <string name="app_ms_offset_enabled_apps">已开启该开关的应用</string>
+    <string name="app_ms_offset_no_apps">暂无应用开启该开关</string>
+    <string name="app_ms_offset_disable">关闭</string>
+    <string name="app_ms_offset_enable">开启</string>
+    <string name="global_playback_offset">整体偏移</string>
+    <string name="global_offset_hint">滑块范围 -3000ms ~ +3000ms；正值延后歌词显示，负值提前；点击「重置偏移」回到中间 0ms</string>
+    <string name="reset_global_offset">重置偏移（回到 0ms）</string>
+
+    <!-- 标题栏列表：重命名当前歌词 -->
+    <string name="action_rename">重命名</string>
+    <string name="rename_title">重命名歌词</string>
+    <string name="rename_hint">文件名（含扩展名）</string>
+    <string name="rename_empty">文件名不能为空</string>
+    <string name="rename_no_file">当前没有可重命名的歌词文件</string>
+    <string name="rename_unsaved">请先保存新建的歌词，再重命名</string>
+    <string name="rename_exists">已存在同名歌词文件</string>
+    <string name="rename_failed">重命名失败，请检查文件权限</string>
+    <string name="rename_success">已重命名为 %1$s</string>
+
+    <!-- 编辑界面播放/暂停按钮 -->
+    <string name="play_pause_no_session">未检测到可控制的播放会话，请确认通知使用权已开启</string>
+
+    <!-- ==================== 主页更多选项：在线搜索歌词 / 监听状态 ==================== -->
+    <string name="action_online_search">在线搜索歌词</string>
+    <string name="action_listen_status">监听状态</string>
+
+    <!-- ==================== 设置 → 应用外观 ==================== -->
+    <string name="appearance_title">应用外观</string>
+    <string name="appearance_entry">应用外观</string>
+    <string name="appearance_entry_hint">主题模式、AMOLED、动态颜色与配色方案；主页歌词相关设置请到主页「更多选项」</string>
+    <string name="ap_section_theme">主题与颜色</string>
+    <string name="ap_amoled">AMOLED 纯黑</string>
+    <string name="ap_amoled_hint">深色使用纯黑背景，浅色使用纯白背景</string>
+    <string name="ap_dynamic_color">动态颜色</string>
+    <string name="ap_dynamic_color_hint">使用系统壁纸配色（Android 12 及以上）</string>
+    <string name="ap_reduce_motion">减少动效</string>
+    <string name="ap_reduce_motion_hint">关闭主题切换过渡与主页歌词动效，下方动效设置将置灰</string>
+    <string name="ap_color_preset">配色方案</string>
+    <string name="ap_accent_color">主调颜色</string>
+    <string name="ap_custom_color">自定义颜色</string>
+    <string name="ap_custom_color_hint">输入 6 位或 8 位十六进制色值，例如 #4C6FFF</string>
+    <string name="ap_custom_color_invalid">色值无效，请输入 #RRGGBB 或 #AARRGGBB</string>
+    <string name="ap_dialog_apply">应用</string>
+    <string name="ap_section_home">主页歌词</string>
+    <string name="ap_display_mode">歌词显示模式</string>
+    <string name="ap_mode_scroll">滚动</string>
+    <string name="ap_mode_pop">逐词跃动</string>
+    <string name="ap_album_blur">封面模糊背景</string>
+    <string name="ap_album_blur_hint">把当前播放的专辑封面模糊处理后作为主页背景</string>
+    <string name="ap_custom_bg_blur">自定义背景图片模糊</string>
+    <string name="ap_custom_bg_blur_hint">把「自定义背景图片」模糊处理后作为主页背景；封面模糊背景开启时以封面为准</string>
+    <string name="ap_keep_awake">播放时保持亮屏</string>
+    <string name="ap_media_controls">底部播放控制条</string>
+    <string name="ap_media_controls_hint">显示封面、歌曲信息、进度与上一首/播放/下一首</string>
+    <string name="ap_media_controls_bg">底部播放控制条背景</string>
+    <string name="ap_media_controls_bg_hint">开启后显示半透明卡片底色；默认关闭，控制条与主页背景融为一体</string>
+    <string name="ap_media_controls_play_bg">底部播放控制条暂停按钮背景</string>
+    <string name="ap_media_controls_play_bg_hint">开启后播放 / 暂停按钮带胶囊底色；默认关闭，只显示图标</string>
+    <string name="ap_media_controls_soft_edge">底部播放控制条上边缘渐隐</string>
+    <string name="ap_media_controls_soft_edge_hint">歌词和控制条增加过渡效果</string>
+    <string name="ap_media_controls_expanded_pos">横屏完全展开位置</string>
+    <string name="ap_media_controls_expanded_pos_hint">横屏完全展开后的垂直位置；水平仍停靠左/右两侧，默认居中，展开状态与位置会自动记忆</string>
+    <string name="ap_media_controls_pos_top">上方</string>
+    <string name="ap_media_controls_pos_center">居中</string>
+    <string name="ap_media_controls_pos_bottom">下方</string>
+    <string name="ap_highlight_row">正在播放的高亮行位置</string>
+    <string name="ap_highlight_row_hint">以列表中线为基准按行上下调整，默认向上 1 行</string>
+    <string name="ap_highlight_row_center">居中</string>
+    <string name="ap_highlight_row_up">居中偏上 %1$d 行</string>
+    <string name="ap_highlight_row_down">居中偏下 %1$d 行</string>
+    <string name="ap_allow_vertical_blank">允许上下空白</string>
+    <string name="ap_allow_vertical_blank_hint">开启后第一行歌词从高亮行位置开始，最后一行歌词在高亮行位置结束；关闭后歌词紧贴列表上下边缘</string>
+
+    <!-- 底部播放控制条（参照 lyrics-android HomePlayer） -->
+    <string name="mc_cover">专辑封面与播放进度</string>
+    <string name="mc_prev">上一首</string>
+    <string name="mc_next">下一首</string>
+    <string name="mc_play_pause">播放 / 暂停</string>
+    <string name="mc_desktop_lyrics">桌面歌词</string>
+    <string name="mc_expand">展开 / 收起播放控制栏</string>
+    <string name="mc_online_search">为当前歌曲重新搜索歌词</string>
+
+    <!-- 主页歌词设置：从设置页迁入的选项 -->
+    <string name="home_lyrics_only_hint">仅作用于主页歌词显示，不影响桌面歌词</string>
+    <string name="home_lyrics_scroll_section">主页歌词滚动与高亮</string>
+    <string name="ap_original_size">原文字号</string>
+    <string name="ap_highlight_enlarge">高亮行放大</string>
+    <string name="ap_highlight_enlarge_hint">开启后正在播放的高亮行使用更大字号；关闭后所有歌词行字号一致</string>
+    <string name="ap_highlight_enlarge_value">放大字号</string>
+    <string name="ap_translation_size">译文字号</string>
+    <string name="ap_font_weight">歌词字重</string>
+    <string name="ap_line_spacing">歌词行间距</string>
+    <string name="ap_weight_light">细体</string>
+    <string name="ap_weight_normal">常规</string>
+    <string name="ap_weight_medium">中等</string>
+    <string name="ap_weight_semibold">半粗</string>
+    <string name="ap_weight_bold">粗体</string>
+    <string name="ap_weight_heavy">特粗</string>
+    <string name="ap_preview">文字预览</string>
+    <string name="ap_preview_line">让音乐陪你到天亮</string>
+    <string name="ap_preview_translation">Let the music stay with you</string>
+    <string name="ap_section_motion">主页歌词动效</string>
+    <string name="ap_eased_scroll">缓动滚动</string>
+    <string name="ap_eased_scroll_hint">切换歌词行时使用平滑滚动动画</string>
+    <string name="ap_scroll_duration">切行时长</string>
+    <string name="ap_stagger">逐行错位</string>
+    <string name="ap_stagger_hint">相邻歌词依次跟随当前行移动</string>
+    <string name="ap_stagger_delay">错位延迟</string>
+    <string name="ap_scale">行间缩放</string>
+    <string name="ap_scale_hint">缩小非当前行，突出正在演唱的歌词</string>
+    <string name="ap_scale_percent">缩放强度</string>
+    <string name="ap_depth_blur">远景模糊</string>
+    <string name="ap_depth_blur_hint">淡化远离当前行的歌词，突出当前行</string>
+    <string name="ap_blur_percent">模糊强度</string>
+
+    <!-- ==================== 在线搜索歌词 ==================== -->
+    <string name="os_title">在线搜索歌词</string>
+    <string name="os_song_hint">歌曲名</string>
+    <string name="os_artist_hint">歌手（可选）</string>
+    <string name="os_search">搜索</string>
+    <string name="os_sources">歌词源</string>
+    <string name="os_sources_title">选择歌词源</string>
+    <string name="os_searching">正在搜索…</string>
+    <string name="os_empty_hint">输入歌曲名后点击搜索；会自动带入当前播放歌曲</string>
+    <string name="os_no_result">未找到歌词，试试更换歌曲名或启用更多歌词源</string>
+    <string name="os_result_count">找到 %1$d 个版本</string>
+    <string name="os_preview">预览</string>
+    <string name="os_use">使用此歌词</string>
+    <string name="os_preview_title">歌词预览</string>
+    <string name="os_saved">已保存并应用：%1$s</string>
+    <string name="os_save_failed">保存歌词失败</string>
+    <string name="os_empty_query">请先输入歌曲名</string>
+    <string name="os_apple_token">Apple Music 凭据（可选）</string>
+    <string name="os_apple_token_hint">填写 media-user-token 后启用 Apple Music 逐字歌词</string>
+    <string name="os_source_disabled_hint">需要凭据的歌词源会在缺少凭据时自动跳过</string>
+    <string name="os_translation_merged">已合并译文</string>
+    <string name="os_copied">已复制歌词</string>
+    <string name="os_copy">复制</string>
+
+    <!-- ==================== 监听状态 ==================== -->
+    <string name="ls_title">监听状态</string>
+    <string name="ls_layout_list">列表排列</string>
+    <string name="ls_layout_swipe">左右滑动</string>
+    <string name="ls_internal_clock">歌词应用内部计时</string>
+    <string name="ls_clock_hint">应用按本机时钟推进的歌词计时（非播放器快照）</string>
+    <string name="ls_session_count">当前 %1$d 个媒体会话</string>
+    <string name="ls_no_session">暂无活跃媒体会话，播放音乐后刷新</string>
+    <string name="ls_session_no">#%1$d 号会话</string>
+    <string name="ls_active_true">active=true</string>
+    <string name="ls_active_false">active=false</string>
+    <string name="ls_observed">观测时间 %1$s</string>
+    <string name="ls_state">状态 %1$s</string>
+    <string name="ls_progress">进度 %1$s / %2$s</string>
+    <string name="ls_base_age">基准年龄 %1$s</string>
+    <string name="ls_pkg">来源 %1$s</string>
+    <string name="ls_refresh">刷新</string>
+    <string name="ls_swipe_hint">左右滑动查看媒体会话</string>
+    <string name="ls_page_clock">应用内部计时</string>
+    <string name="ls_page_indicator">%1$d / %2$d</string>
+    <string name="ls_search_lyric">重新匹配在线歌词</string>
+    <string name="ls_prev">上一首</string>
+    <string name="ls_play">播放 / 暂停</string>
+    <string name="ls_next">下一首</string>
+    <!-- 会话卡片按自身状态显示的播放 / 暂停文案 -->
+    <string name="ls_action_play">播放</string>
+    <string name="ls_action_pause">暂停</string>
+    <!-- 定向控制失败：会话已销毁/重建、不支持该动作，或服务未连接 -->
+    <string name="ls_session_control_failed">该会话已失效或不支持该操作，请刷新后重试</string>
+    <!-- 指令已发出但目标会话静默丢弃：声明支持控制却不响应 -->
+    <string name="ls_session_no_response">该会话未响应控制指令，可能不接受外部控制；可尝试其它会话卡片</string>
+    <string name="ls_prev_short">◀◀</string>
+    <string name="ls_play_short">▶</string>
+    <string name="ls_pause_short">||</string>
+    <string name="ls_next_short">▶▶</string>
+    <string name="ls_status_connected">监听服务已连接</string>
+    <string name="ls_status_disconnected">监听服务未连接</string>
+
+    <!-- ==================== 主页歌词设置（二级页面） ==================== -->
+    <string name="home_lyrics_settings_title">主页歌词设置</string>
+    <string name="ap_section_home_align">歌词对齐</string>
+
+    <!-- 自定义颜色：HSV 滑块 -->
+    <string name="ap_custom_color_hue">色相</string>
+    <string name="ap_custom_color_saturation">饱和度</string>
+    <string name="ap_custom_color_value">明度</string>
+    <string name="ap_custom_color_preview">颜色预览</string>
+
+    <!-- 在线搜索歌词：逐字数据已由结果摘要「带逐字数据」标明，不再重复显示 -->
+    <string name="os_result_count_with_word">找到 %1$d 个版本 · %2$d 个带逐字数据</string>
+
+    <!-- 在线搜索歌词：无匹配时自动获取 / 逐字优先 / 结果保留 -->
+    <string name="os_auto_fetch">无匹配歌词时，自动在线搜索一次</string>
+    <string name="os_auto_fetch_hint">每首歌仅请求一次；歌词与「无结果」记录存入独立的在线歌词缓存目录，之后读本地，不再联网</string>
+    <string name="os_prefer_word">优先使用带逐字数据的歌词</string>
+    <string name="os_prefer_word_hint">自动获取时优先选用带逐字时间轴的版本；关闭则按综合匹配度选最高分版本</string>
+    <string name="os_last_result">上次搜索结果</string>
+    <string name="os_saved_cache">已保存并应用：%1$s</string>
+
+    <!-- 监听状态：会话卡片独立歌词渲染 -->
+    <string name="ls_lyric_section">歌词进度</string>
+    <string name="ls_lyric_lines">显示行数</string>
+    <string name="ls_lyric_lines_value">%1$d 行</string>
+    <string name="ls_lyric_empty">暂无已加载歌词</string>
+    <string name="ls_lyric_line_prev">上一句</string>
+    <string name="ls_lyric_line_current">正在播放</string>
+    <string name="ls_lyric_line_next">下一句</string>
+    <string name="ls_lyric_lines_unified">歌词显示行数（统一）</string>
+    <string name="ls_lyric_lines_hint">统一控制「应用内部计时」与各会话卡片的歌词行数；默认 3 行 = 上一句 / 正在播放 / 下一句</string>
+    <string name="ls_clock_lyric_section">内部计时歌词</string>
+
+    <!-- ==================== 主页更多选项 → 关于 ==================== -->
+    <string name="about_title">致谢</string>
+    <string name="about_open_source_title">感谢以下项目的开源，此项目使用和参考了以下开源项目的代码</string>
+    <string name="about_open_hint">点击项目可在浏览器中打开</string>
+    <string name="about_project_lyrics_android">lyrics-android</string>
+    <string name="about_project_lyrics_android_url">github.com/LuoH-AN/lyrics-android</string>
+    <string name="about_project_capsulyric">Capsulyric</string>
+    <string name="about_project_capsulyric_url">github.com/FrancoGiudans/Capsulyric</string>
+    <string name="about_open_failed">未找到可用的浏览器</string>
+
+    <!-- ==================== 无专辑封面时的自定义背景回退 ==================== -->
+    <string name="ap_no_album_art_custom_bg">无专辑封面时使用自定义背景图片</string>
+
+    <!-- ==================== 设置项搜索（主页歌词设置 / 更多设置 共用） ==================== -->
+    <string name="settings_search_title">搜索设置</string>
+    <string name="settings_search_action">搜索设置</string>
+    <string name="settings_search_hint">搜索全部设置项，可跨页面跳转</string>
+    <string name="settings_search_entry_hint">搜索设置项（含更多设置的二级页面）</string>
+    <string name="settings_search_empty">没有找到相关设置项</string>
+    <string name="settings_search_count">共 %1$d 项设置</string>
+    <string name="settings_search_qualified">%1$s · %2$s</string>
+    <string name="settings_search_recent">最近搜索</string>
+    <string name="settings_search_recent_clear">清空</string>
+    <string name="settings_search_recent_item">搜索「%1$s」</string>
+    <string name="settings_search_recent_removed">已移除「%1$s」</string>
+    <string name="settings_search_recent_cleared">已清空最近搜索</string>
+</resources>

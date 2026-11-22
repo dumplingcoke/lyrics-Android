@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="4dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameLayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/save_as_name_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 最近目录标题行：标题 + 排序切换 -->
+    <LinearLayout
+        android:id="@+id/recentDirsHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/recent_dirs"
+            android:textSize="13sp"
+            android:textColor="#808080" />
+
+        <TextView
+            android:id="@+id/btnSortDirs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="@string/sort_newest"
+            android:textSize="12sp"
+            android:textColor="?attr/colorPrimary"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+    </LinearLayout>
+
+    <!-- 最近目录列表：超过 4 项（约 224dp）后出现滚动条 -->
+    <com.trae.androidlyrics.MaxHeightRecyclerView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/recentDirsRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
+        app:maxHeight="224dp"
+        android:visibility="gone" />
+
+    <!-- 选择模式操作栏：全选 / 取消全选 / 删除选中 / 全部删除 / 取消编辑 -->
+    <HorizontalScrollView
+        android:id="@+id/selectionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/btnSelectAllDirs"
+                style="@style/DialogActionText"
+                android:text="@string/select_all" />
+
+            <TextView
+                android:id="@+id/btnDeselectAllDirs"
+                style="@style/DialogActionText"
+                android:text="@string/select_none" />
+
+            <TextView
+                android:id="@+id/btnDeleteSelectedDirs"
+                style="@style/DialogActionText"
+                android:text="@string/delete_selected" />
+
+            <TextView
+                android:id="@+id/btnDeleteAllDirs"
+                style="@style/DialogActionText"
+                android:text="@string/delete_all" />
+
+            <TextView
+                android:id="@+id/btnCancelDirEdit"
+                style="@style/DialogActionText"
+                android:text="@string/cancel_edit" />
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>

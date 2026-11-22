@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 歌词编辑页「更多设置」弹窗：时间精度、整体小数点修改、键盘与按钮显隐开关。
+     内容较长，外层自行提供滚动，与「整体偏移」弹窗保持一致。 -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="8dp">
+
+        <!-- 添加/更新时间戳时间精度 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/timestamp_precision"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinnerTimestampDigits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:entries="@array/timestamp_precision_options"
+            android:minHeight="44dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="12dp"
+            android:background="#33888888" />
+
+        <!-- 整体小数点修改 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/decimal_bulk_title"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/decimal_remove_label"
+            android:textSize="12sp"
+            android:alpha="0.7" />
+
+        <Spinner
+            android:id="@+id/spinnerDecimalRemove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/decimal_remove_options"
+            android:minHeight="44dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/decimal_mode_label"
+            android:textSize="12sp"
+            android:alpha="0.7" />
+
+        <Spinner
+            android:id="@+id/spinnerDecimalMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/decimal_mode_options"
+            android:minHeight="44dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStartDecimalModify"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:textSize="12sp"
+                android:text="@string/decimal_start" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUndoDecimalModify"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:textSize="12sp"
+                android:text="@string/decimal_undo" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="#33888888" />
+
+        <!-- 编辑辅助开关 -->
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchScrollCursorOnKeyboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:textSize="14sp"
+            android:text="@string/scroll_cursor_on_keyboard" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchShowOpenKeyboardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:textSize="14sp"
+            android:text="@string/show_open_keyboard_button" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:layout_marginBottom="6dp"
+            android:text="@string/open_keyboard_hint"
+            android:textSize="12sp"
+            android:alpha="0.7" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchShowAddBlankAbove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:textSize="14sp"
+            android:text="@string/show_add_blank_above_button" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchShowAddBlankBelow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:textSize="14sp"
+            android:text="@string/show_add_blank_below_button" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchShowDeleteAllBlank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:textSize="14sp"
+            android:text="@string/show_delete_all_blank_button" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchShowDeleteCurrentLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:textSize="14sp"
+            android:text="@string/show_delete_current_line_button" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="8dp"
+            android:background="#33888888" />
+
+        <!-- 编辑按钮布局：一行放不下时自动换行（默认）或左右滚动 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_button_layout"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/buttonLayoutGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLayoutWrap"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@string/edit_button_layout_wrap" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLayoutScroll"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@string/edit_button_layout_scroll" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/edit_button_layout_hint"
+            android:textSize="12sp"
+            android:alpha="0.7" />
+
+    </LinearLayout>
+</ScrollView>

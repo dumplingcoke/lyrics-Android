@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- 主页歌词设置 / 更多设置 共用：始终显示在 ActionBar 的搜索入口 -->
+    <item
+        android:id="@+id/action_settings_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/settings_search_action"
+        app:showAsAction="always" />
+
+</menu>

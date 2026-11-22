@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 主页底部播放控制条：按 lyrics-android 的 HomePlayer 重做。
+     结构 = 圆形封面（收起时带播放进度环，展开后进度环渐隐）+ 歌曲信息 + 桌面歌词开关
+     + 可连续高度插值展开的详情（进度滑块 / 时间 / 上一首 / 播放键 / 下一首）。
+     卡片底色、播放键底色、上边缘柔化均由「主页歌词设置」的三个开关控制；
+     横屏下可收缩成「仅封面」并长按拖动改变左右位置，位置与展开状态持久化。
+     参考实现中的「⋯ 更多」按钮不迁移：更多选项仍使用主页右上角工具栏菜单。 -->
+<!-- 根 View 换成自定义 MediaControlsCardView：在 ViewGroup 层统一拦截
+     「长按拖动改位置」与「上下滑切展开状态」，避免各子 View 的点击/长按互相抢事件。 -->
+<com.trae.androidlyrics.MediaControlsCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mediaControlsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="8dp"
+    android:visibility="gone"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="28dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <!-- 头部：56dp 圆形封面（含进度环）+ 歌曲信息 + 桌面歌词开关 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.trae.androidlyrics.CoverArtView
+                android:id="@+id/mediaCover"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:contentDescription="@string/mc_cover" />
+
+            <LinearLayout
+                android:id="@+id/mediaInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical">
+
+                <!-- 歌名：超出可用宽度时循环滚动（见 MarqueeTextView），短歌名静止显示 -->
+                <com.trae.androidlyrics.MarqueeTextView
+                    android:id="@+id/mediaTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mediaArtist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/mediaOverlayToggle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/mc_desktop_lyrics"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_lyrics"
+                app:tint="#FFFFFFFF" />
+        </LinearLayout>
+
+        <!-- 展开区：进度滑块 + 时间 + 上一首 / 胶囊播放键 / 下一首 -->
+        <LinearLayout
+            android:id="@+id/mediaDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <SeekBar
+                android:id="@+id/mediaProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="1000"
+                android:progressTint="#FFFFFFFF"
+                android:thumbTint="#FFFFFFFF" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/mediaPosition"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/mediaDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/mediaPrev"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/mc_prev"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_skip_previous"
+                    app:tint="#FFFFFFFF" />
+
+                <ImageButton
+                    android:id="@+id/mediaPlay"
+                    android:layout_width="88dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/bg_media_play_pill"
+                    android:contentDescription="@string/mc_play_pause"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_play_arrow"
+                    app:tint="#FFFFFFFF" />
+
+                <ImageButton
+                    android:id="@+id/mediaNext"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/mc_next"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_skip_next"
+                    app:tint="#FFFFFFFF" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.trae.androidlyrics.MediaControlsCardView>

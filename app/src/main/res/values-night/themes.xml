@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 夜间只覆盖「状态栏图标反色」这一项，其余（状态栏/导航栏颜色、actionBarStyle
+         等）全部继承 values 里的完整定义。切勿在这里整段重写基样式：那会让夜间悄悄
+         丢掉 values 侧新增的共用项（标题栏去阴影的 actionBarStyle 就是这样漏掉的）。 -->
+    <style name="Base.Theme.Androidlyrics" parent="Base.Theme.Androidlyrics.Day">
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

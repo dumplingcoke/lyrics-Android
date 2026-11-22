@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="seed">#4C6FFF</color>
+    <color name="ic_launcher_background">#4C6FFF</color>
+
+    <!-- 歌词高亮色 -->
+    <color name="lyric_active">#FFFFFF</color>
+    <color name="lyric_inactive">#80FFFFFF</color>
+</resources>

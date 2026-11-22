@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 设置页 windowContentOverlay 的占位遮罩：**什么都不画**（零高度 + 全透明）。
+
+     这个属性本身必须留着——原生 Material 主题里它是 null，MIUI 等 ROM 会借机
+     塞一张硬阴影图，于是标题栏下方出现一条突兀的分界。显式给一张空遮罩后，
+     ROM 的默认阴影图不再生效，边界也保持干净。
+
+     真正的过渡改由 EdgeFadeFrameLayout 完成：它给可滚动内容套一层 alpha 渐变
+     蒙版（DstIn），内容卷到标题栏下方时逐渐溶解回页面背景，与「底部播放控制条
+     上边缘柔化」是同一套机制，不会在内容上盖出任何一条可见色带。 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@android:color/transparent" />
+    <size android:height="0dp" />
+</shape>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 基样式的完整定义只写在这里（含 actionBarStyle 等所有共用项）。
+         values-night 的 Base.Theme.Androidlyrics 继承本样式，只覆盖
+         windowLightStatusBar；不要再在 values-night 里整段重写——那样新增的
+         共用项（例如下面这条 actionBarStyle）会在夜间被悄悄丢掉。 -->
+    <style name="Base.Theme.Androidlyrics.Day" parent="Theme.Material3.DayNight">
+        <!-- 状态栏取 ActionBar 的背景色（M3 的 actionBarStyle 背景是 colorSurfaceContainer），
+             用 colorSurface 会与标题栏差一个色阶，表现为顶部一条明显色带 -->
+        <item name="android:statusBarColor">?attr/colorSurfaceContainer</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimary">@color/seed</item>
+        <item name="actionBarStyle">@style/Widget.Androidlyrics.ActionBar</item>
+    </style>
+
+    <style name="Base.Theme.Androidlyrics" parent="Base.Theme.Androidlyrics.Day" />
+
+    <!-- 标题栏去掉自身投影。
+         AppCompat 的 Base.Widget.AppCompat.ActionBar 带 elevation=4dp
+         （@dimen/abc_action_bar_elevation_material），M3 的 ActionBar.Solid 直接继承，
+         于是标题栏一直在给内容区顶部投一条全宽、约 4dp 的暗影——正是「标题栏下沿
+         一条小黑边」的来源；旧版那条常驻色带恰好把它盖住了，改成内容 alpha 渐变后
+         才露出来。M3 规范里 top app bar 本身就是 0 elevation（靠 on-scroll 容器色
+         区分层级，而不是阴影），清零后边界是一条干净的同色过渡。 -->
+    <style name="Widget.Androidlyrics.ActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="elevation">0dp</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <!-- 主界面：无 ActionBar，自行放置 Toolbar -->
+    <style name="Theme.Androidlyrics" parent="Base.Theme.Androidlyrics">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!-- 内容（背景图 / 背景层）铺满到状态栏下面，状态栏必须透明，
+             否则顶部会出现一条与内容割裂的深色横条 -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- 设置界面：保留 ActionBar 以便自动显示返回箭头。
+         窗口背景与 ActionBar 同色（colorSurfaceContainer），整页颜色统一；
+         关闭窗口动画，切换主题触发 recreate 时不会出现黑白闪帧。 -->
+    <style name="Theme.Androidlyrics.Settings" parent="Base.Theme.Androidlyrics">
+        <item name="android:windowBackground">?attr/colorSurfaceContainer</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <!-- 标题栏底部不再叠加任何色带：原生 Material 此值为 null，但 MIUI 等 ROM
+             会塞一张硬阴影图；这里显式覆盖成一张空遮罩把 ROM 阴影压掉。
+             边界过渡改由 EdgeFadeFrameLayout 用内容自身的 alpha 渐变完成
+             （与「底部播放控制条上边缘柔化」同一机制，不盖雾、不常驻）。 -->
+        <item name="android:windowContentOverlay">@drawable/window_content_overlay_blank</item>
+    </style>
+
+    <!-- 透明中转页：磁贴 / 快捷方式开关动作、从悬浮窗拉起系统目录选择器 -->
+    <style name="Theme.Androidlyrics.Translucent" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <!-- Material3 默认 statusBarColor 取自 colorPrimary（紫色系），
+             透明窗口出现的一瞬状态栏会被染紫闪一下；显式设为透明消除闪帧 -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="colorPrimary">@color/seed</item>
+        <!-- 中转页无界面，关闭窗口进出动画避免闪动 -->
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <!-- ==================== 应用外观：8 套配色预设 ====================
+         由 AppearancePrefs.applyThemeOverlay() 在 Activity  setContentView 之前
+         theme.applyStyle(..., true) 叠加，覆盖 Material3 的 colorPrimary 系列。 -->
+    <style name="ColorOverlay_Ocean">
+        <item name="colorPrimary">#FF4C6FFF</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
+        <item name="colorSecondary">#FF4C6FFF</item>
+        <item name="colorAccent">#FF4C6FFF</item>
+    </style>
+
+    <style name="ColorOverlay_Midnight">
+        <item name="colorPrimary">#FF7C8AFF</item>
+        <item name="colorOnPrimary">#FF0B1030</item>
+        <item name="colorSecondary">#FF3F51B5</item>
+        <item name="colorAccent">#FF7C8AFF</item>
+    </style>
+
+    <style name="ColorOverlay_Nordic">
+        <item name="colorPrimary">#FF5B8AA8</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
+        <item name="colorSecondary">#FF7FA9C4</item>
+        <item name="colorAccent">#FF5B8AA8</item>
+    </style>
+
+    <style name="ColorOverlay_Forest">
+        <item name="colorPrimary">#FF2E7D5B</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
+        <item name="colorSecondary">#FF69B18C</item>
+        <item name="colorAccent">#FF2E7D5B</item>
+    </style>
+
+    <style name="ColorOverlay_Sunset">
+        <item name="colorPrimary">#FFE8663D</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
+        <item name="colorSecondary">#FFF2A65A</item>
+        <item name="colorAccent">#FFE8663D</item>
+    </style>
+
+    <style name="ColorOverlay_Rose">
+        <item name="colorPrimary">#FFD8527B</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
+        <item name="colorSecondary">#FFF09BB5</item>
+        <item name="colorAccent">#FFD8527B</item>
+    </style>
+
+    <style name="ColorOverlay_Lavender">
+        <item name="colorPrimary">#FF8A63D2</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
+        <item name="colorSecondary">#FFB79BEA</item>
+        <item name="colorAccent">#FF8A63D2</item>
+    </style>
+
+    <style name="ColorOverlay_Slate">
+        <item name="colorPrimary">#FF5A6472</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
+        <item name="colorSecondary">#FF8B95A3</item>
+        <item name="colorAccent">#FF5A6472</item>
+    </style>
+
+    <!-- AMOLED：深色纯黑、浅色纯白 -->
+    <style name="AmoledDarkOverlay">
+        <item name="colorSurface">#FF000000</item>
+        <item name="colorSurfaceContainer">#FF000000</item>
+        <item name="colorSurfaceContainerLow">#FF000000</item>
+        <item name="colorSurfaceContainerHigh">#FF0A0A0A</item>
+        <item name="colorSurfaceContainerHighest">#FF141414</item>
+        <item name="android:windowBackground">#FF000000</item>
+        <item name="android:colorBackground">#FF000000</item>
+        <item name="android:navigationBarColor">#FF000000</item>
+    </style>
+
+    <style name="AmoledLightOverlay">
+        <item name="colorSurface">#FFFFFFFF</item>
+        <item name="colorSurfaceContainer">#FFFFFFFF</item>
+        <item name="colorSurfaceContainerLow">#FFFFFFFF</item>
+        <item name="colorSurfaceContainerHigh">#FFF7F7F7</item>
+        <item name="colorSurfaceContainerHighest">#FFEEEEEE</item>
+        <item name="android:windowBackground">#FFFFFFFF</item>
+        <item name="android:colorBackground">#FFFFFFFF</item>
+    </style>
+
+    <style name="SectionHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">28dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <!-- 编辑模式文字按钮样式 -->
+    <style name="EditActionText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- 设置页颜色圆点样式 -->
+    <style name="ColorDot">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <!-- 桌面歌词面板颜色圆点样式 -->
+    <style name="DesktopColorDot">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <!-- 搜索设置「最近搜索」的关键词胶囊：比标准 Assist Chip 更紧凑，
+         8 条历史在多数机型上两行内排完，不挤压下方结果列表 -->
+    <style name="RecentSearchChip" parent="Widget.Material3.Chip.Assist">
+        <item name="android:textSize">12sp</item>
+        <item name="android:maxWidth">220dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="chipMinHeight">32dp</item>
+        <item name="chipStartPadding">10dp</item>
+        <item name="chipEndPadding">10dp</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+    </style>
+
+    <!-- 设置页数值微调按钮（-1 / +1）：M3 默认 minWidth 64dp 且带上下 inset，
+         放在滑块行里会挤掉 SeekBar，这里压成 40×40 的紧凑方形按钮 -->
+    <style name="StepAdjustButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <!-- 歌词文件存储「选择模式」操作项：沿用对话框操作文字外观，等宽铺满一行 -->
+    <style name="SelectionActionText" parent="DialogActionText">
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:paddingStart">2dp</item>
+        <item name="android:paddingEnd">2dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- 对话框内操作文字按钮样式 -->
+    <style name="DialogActionText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+</resources>

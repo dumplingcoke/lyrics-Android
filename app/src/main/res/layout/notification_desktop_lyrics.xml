@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    桌面歌词通知的自定义正文布局。
+    普通通知的 action 按钮需要展开通知后才显示，因此把开关按钮直接放进正文，
+    使其在通知折叠状态下也可见、可点击。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/notifStatusText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="14sp"
+        android:text="@string/notif_desktop_on_text" />
+
+    <Button
+        android:id="@+id/notifToggleBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:textAllCaps="false"
+        android:textSize="13sp"
+        android:text="@string/notif_action_turn_on" />
+</LinearLayout>

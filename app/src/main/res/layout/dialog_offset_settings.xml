@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 播放界面「更多选项 → 偏移设置」：
+     按应用开关（毫秒信息不可信）+ 已开启应用列表 + 整体偏移滑块 -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="12dp">
+
+        <!-- 开关作用于当前播放应用 -->
+        <TextView
+            android:id="@+id/tvCurrentApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/app_ms_offset_no_app"
+            android:textSize="13sp"
+            android:alpha="0.75" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchAppMsOffset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="@string/app_ms_offset_switch"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="@string/app_ms_offset_hint"
+            android:textSize="12sp"
+            android:alpha="0.65" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_ms_offset_enabled_apps"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/appListContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/tvNoApps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/app_ms_offset_no_apps"
+            android:textSize="12sp"
+            android:alpha="0.6"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="?attr/colorOutlineVariant" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/global_playback_offset"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvGlobalOffsetValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="76dp"
+                android:gravity="end"
+                android:text="0 ms"
+                android:textSize="14sp"
+                android:textColor="?attr/colorPrimary" />
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/globalOffsetBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:min="0"
+            android:max="6000"
+            android:progress="3000" />
+
+        <TextView
+            android:id="@+id/btnResetGlobalOffset"
+            style="@style/DialogActionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:text="@string/reset_global_offset" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/global_offset_hint"
+            android:textSize="12sp"
+            android:alpha="0.65" />
+    </LinearLayout>
+</ScrollView>

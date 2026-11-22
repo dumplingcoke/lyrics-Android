@@ -1,0 +1,58 @@
+### 本地配置 / 签名文件（绝不提交）
+local.properties
+local.properties.bak
+keystore.properties
+signing.properties
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+*.key
+*.bks
+
+### 测试素材 / 杂物（一律不入库）
+歌词和歌曲_仅用于测试功能是否实现/
+.screenshots/
+ui_dump.xml
+WRC逐字歌词预览.html
+打开app-debug构建APK文件夹.bat
+*.log
+*.hprof
+
+### Gradle / 构建产物
+.gradle/
+.gradle-cache/
+.kotlin/
+build/
+captures/
+release/
+debug/
+lint-results*
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+output-metadata.json
+output.json
+
+### 音视频素材
+*.flac
+*.mp3
+*.m4a
+*.wav
+*.ogg
+*.aac
+
+### IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+### 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini

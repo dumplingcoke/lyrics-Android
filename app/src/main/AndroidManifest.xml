@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 在线搜索歌词（QQ音乐/网易云/酷狗/LRCLIB/LrcApi/汽水/Musixmatch/Apple Music） -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 桌面歌词悬浮窗 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- 前台服务（桌面歌词） -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <!-- 通知栏桌面歌词开关 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- 桌面歌词进程保护：进程被清理后用闹钟重新拉起前台服务 -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+
+    <!-- 调试模式解析歌曲文件名时按媒体库 ID 查询 MediaStore -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <!-- 「关于」页点击开源项目链接时用浏览器打开（Android 11+ 包可见性） -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Androidlyrics">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Androidlyrics">
+
+            <!-- 桌面入口。补 DEFAULT 是兼容用 MATCH_DEFAULT_ONLY 查询 LAUNCHER 的
+                 安装器实现：缺 DEFAULT 时部分 ROM 解析不到启动入口，「打开」会被隐藏/置灰。 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- 用其他应用打开：按 MIME 类型匹配。 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:mimeType="text/*" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="text/lrc" />
+                <data android:mimeType="text/x-lrc" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/x-subrip" />
+                <data android:mimeType="application/srt" />
+                <data android:mimeType="application/x-srt" />
+                <data android:mimeType="application/x-lrc" />
+                <data android:mimeType="application/lrc" />
+                <data android:mimeType="audio/x-lrc" />
+                <data android:mimeType="audio/lrc" />
+                <!-- 新增歌词格式：KRC / QRC / YRC / TRC / WRC / TTML / VTT -->
+                <data android:mimeType="application/ttml+xml" />
+                <data android:mimeType="text/vtt" />
+                <data android:mimeType="text/x-vtt" />
+                <data android:mimeType="application/xml" />
+                <data android:mimeType="text/xml" />
+                <data android:mimeType="application/x-krc" />
+                <data android:mimeType="application/x-qrc" />
+                <data android:mimeType="application/x-yrc" />
+                <data android:mimeType="application/x-trc" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="file" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/*" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/x-subrip" />
+                <data android:mimeType="application/srt" />
+                <data android:mimeType="application/x-lrc" />
+                <data android:mimeType="application/ttml+xml" />
+                <data android:mimeType="text/vtt" />
+                <data android:mimeType="application/xml" />
+                <data android:mimeType="text/xml" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+
+            <!-- 静态应用快捷方式：长按桌面图标即可看到「显示歌词悬浮窗」 -->
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+        <!-- 安装完成页「打开」按钮的专用启动入口（QQ 传 APK / 覆盖更新后可直接打开）。
+             系统安装器靠 PackageManager.getLaunchIntentForPackage() 判断「打开」是否可用，
+             该方法优先查 ACTION_MAIN + CATEGORY_INFO，查不到才回退 CATEGORY_LAUNCHER。
+             MainActivity 上混着 6 个 VIEW/SEND/deep-link filter，部分 ROM 的安装器实现
+             解析这种入口会失败，导致完成页只给「完成」。这里用 activity-alias 提供一个
+             不带任何 VIEW/SEND/data 的纯净入口，让安装器一定能拿到可启动 intent。
+             alias 命中后系统直接启动 targetActivity 并原样透传 intent；桌面图标、静态
+             快捷方式、外部打开/分享歌词、默认打开方式记录的 component 全部保持不变。
+             targetActivity 必须在本别名之前声明；写全限定名是因为 applicationId
+             (com.trae.lyrics) 与 namespace (com.trae.androidlyrics) 不同。 -->
+        <activity-alias
+            android:name=".InstallOpenAlias"
+            android:targetActivity="com.trae.androidlyrics.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.INFO" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="@string/settings_title"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <!-- 设置项搜索：主页歌词设置与更多设置共用，可跨页面跳转并定位 -->
+        <activity
+            android:name=".SettingsSearchActivity"
+            android:exported="false"
+            android:label="@string/settings_search_title"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <!-- 关于：应用信息与使用的开源项目（可跳转浏览器） -->
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false"
+            android:label="@string/about_title"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <!-- 应用外观：仅主题模式与配色 -->
+        <activity
+            android:name=".AppearanceActivity"
+            android:exported="false"
+            android:label="@string/appearance_title"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <!-- 主页歌词设置：显示模式 / 歌词对齐 / 排版 / 字号 / 减少动效 / 动效 -->
+        <activity
+            android:name=".HomeLyricsSettingsActivity"
+            android:exported="false"
+            android:label="@string/home_lyrics_settings_title"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <!-- 在线搜索歌词：多源检索、预览、选用 -->
+        <activity
+            android:name=".OnlineSearchActivity"
+            android:exported="false"
+            android:label="@string/os_title"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <!-- 监听状态：媒体会话列表 / 左右滑动 + 应用内部计时 -->
+        <activity
+            android:name=".ListenStatusActivity"
+            android:exported="false"
+            android:label="@string/ls_title"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <!-- 歌词颜色设置：主界面歌词 / 桌面歌词两个模块分别配置文字颜色 -->
+        <activity
+            android:name=".LyricColorSettingsActivity"
+            android:exported="false"
+            android:label="@string/lyric_color_settings"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <!-- 自定义背景图片：先进入管理页挑选已添加的图片，再按需找新图 / 调整显示位置 -->
+        <activity
+            android:name=".BackgroundManageActivity"
+            android:exported="false"
+            android:label="@string/background_manage_title"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <activity
+            android:name=".BackgroundEditActivity"
+            android:exported="false"
+            android:label="@string/background_edit_title"
+            android:parentActivityName=".BackgroundManageActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <activity
+            android:name=".LyricStorageActivity"
+            android:exported="false"
+            android:label="@string/storage_manage"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <activity
+            android:name=".LogViewActivity"
+            android:exported="false"
+            android:label="@string/log_view_title"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <activity
+            android:name=".DataManagerActivity"
+            android:exported="false"
+            android:label="@string/data_manage"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.Androidlyrics.Settings" />
+
+        <!-- 透明中转页：从桌面歌词悬浮窗拉起系统目录选择器 -->
+        <activity
+            android:name=".QuickImportActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.Androidlyrics.Translucent" />
+
+        <!-- 透明中转页：快捷磁贴 / 应用快捷方式在前台完成动作（启动器需可访问）。
+             taskAffinity="" 让它始终落在独立任务：否则会被 NEW_TASK 塞进
+             MainActivity 所在任务，finish 后把主界面带回前台（表现为误跳转） -->
+        <activity
+            android:name=".TileActionActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:taskAffinity=""
+            android:theme="@style/Theme.Androidlyrics.Translucent" />
+
+        <!-- 系统下拉快捷开关：显示歌词悬浮窗（点按切换桌面歌词） -->
+        <service
+            android:name=".DesktopLyricsTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_tile_desktop_lyrics"
+            android:label="@string/tile_desktop_lyrics"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <!-- 必须是 ACTION_QS_TILE（小米 MIUI 适配文档 2.1 与 AOSP 一致），
+                     系统按此 action 枚举第三方磁贴，写错将完全不被收录 -->
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <!-- 标记为双态开关（AOSP META_DATA_TOGGLEABLE_TILE），供无障碍识别；
+                 不声明 ACTIVE_TILE，保持标准监听模式，每次展开面板都会刷新状态 -->
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+
+        <!-- 系统下拉快捷开关：歌词调试信息（点按切换调试信息悬浮窗） -->
+        <service
+            android:name=".DebugInfoTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_tile_debug_info"
+            android:label="@string/tile_debug_info"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <!-- 必须是 ACTION_QS_TILE（小米 MIUI 适配文档 2.1 与 AOSP 一致），
+                     系统按此 action 枚举第三方磁贴，写错将完全不被收录 -->
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <!-- 标记为双态开关（AOSP META_DATA_TOGGLEABLE_TILE），供无障碍识别；
+                 不声明 ACTIVE_TILE，保持标准监听模式，每次展开面板都会刷新状态 -->
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+
+        <!-- 系统下拉快捷开关：打开歌词界面 -->
+        <service
+            android:name=".OpenLyricsTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_tile_open_lyrics"
+            android:label="@string/desktop_open_app"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <!-- 必须是 ACTION_QS_TILE（小米 MIUI 适配文档 2.1 与 AOSP 一致），
+                     系统按此 action 枚举第三方磁贴，写错将完全不被收录 -->
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <!-- 通知监听服务：读取系统媒体播放进度 -->
+        <service
+            android:name=".MusicNotificationListenerService"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <!-- 桌面歌词悬浮窗服务 -->
+        <service
+            android:name=".DesktopLyricsService"
+            android:exported="false"
+            android:stopWithTask="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="desktop_lyrics" />
+        </service>
+
+        <!-- 调试模式悬浮窗服务 -->
+        <service
+            android:name=".DebugFloatService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="debug_overlay" />
+        </service>
+
+    </application>
+
+</manifest>

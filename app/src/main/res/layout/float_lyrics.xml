@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 根布局用 DesktopLyricsFadeLayout（LinearLayout 子类）：圆角黑底仍由本层的 background
+     绘制，而「左右边缘渐隐」只在 dispatchDraw 里裁子 View（文字）的 alpha，
+     因此背景与圆角不受影响。开关与羽化范围（按半个字计，1~6，默认 1）
+     由 DesktopLyricsService 从偏好同步。 -->
+<com.trae.androidlyrics.DesktopLyricsFadeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/floatRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_desktop_lyric"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <com.trae.androidlyrics.OutlineTextView
+        android:id="@+id/floatText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <com.trae.androidlyrics.OutlineTextView
+        android:id="@+id/floatTextSecond"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textColor="#B0FFFFFF"
+        android:textSize="13sp"
+        android:layout_marginTop="2dp"
+        android:visibility="gone" />
+</com.trae.androidlyrics.DesktopLyricsFadeLayout>

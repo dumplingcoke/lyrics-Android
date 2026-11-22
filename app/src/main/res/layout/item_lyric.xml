@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- 普通行也用 OutlineTextView：主界面描边开关/颜色/粗细/位置对逐字行和普通行都生效 -->
+    <com.trae.androidlyrics.OutlineTextView
+        android:id="@+id/lyricLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="#8A8A8A"
+        android:textSize="18sp"
+        android:lineSpacingExtra="4dp"
+        android:includeFontPadding="false" />
+
+    <!-- 逐字蒙版视图：当前行逐字动画时替换 TextView 显示 -->
+    <com.trae.androidlyrics.MaskedLyricView
+        android:id="@+id/lyricMask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:visibility="gone" />
+</FrameLayout>
