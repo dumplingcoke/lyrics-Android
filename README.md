@@ -15,6 +15,8 @@
 
 修改代码时，请遵循使用项目的各自许可。
 
+### [TG频道](https://t.me/RwkkJgbyl)
+
 ## 常见问题
 参考 [Tcrrrry/desktop-lyrics](https://github.com/tcrrry/desktop-lyrics)的README编写而来。
 
