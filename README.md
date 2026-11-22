@@ -11,9 +11,9 @@
 前期由Trae的auto模式（自动使用模型）创建此项目，后续由glm 5.3、kimi-k3.1-pro、kimi-k3、DeepSeek-v4.1-flash模型持续优化和修bug；参与工具还有workbuddy和豆包工作，期间还使用了workbuddy的hy4模型，豆包工作参与的模型和Trae一致。
 过程中chatgpt也参与到了bug分析。
 
-最后查找如何实现状态栏歌词时，发现[Capsulyric](https://github.com/FrancoGiudans/Capsulyric)]和[桌面歌词](https://github.com/LuoH-AN/lyrics-android)的优秀项目，根据两个项目新增了在线搜索歌词的功能，并根据[桌面歌词](https://github.com/LuoH-AN/lyrics-android)重构了主页歌词页面。
+最后查找如何实现状态栏歌词时，发现[Capsulyric](https://github.com/FrancoGiudans/Capsulyric)和[桌面歌词](https://github.com/LuoH-AN/lyrics-android)的优秀项目，根据两个项目新增了在线搜索歌词的功能，并根据[桌面歌词](https://github.com/LuoH-AN/lyrics-android)重构了主页歌词页面。
 
-使用
+修改代码时，请遵循使用项目的各自许可。
 
 ## 常见问题
 参考 [Tcrrrry/desktop-lyrics](https://github.com/tcrrry/desktop-lyrics)的README编写而来。
